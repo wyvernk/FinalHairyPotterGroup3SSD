@@ -1,15 +1,7 @@
 ﻿@using System
 @using Ecommerce.Web.Mvc
 @using Ecommerce.Web.Mvc.Models
-@using Ecommerce.Web.Mvc.Constants
-@using Ecommerce.Application.Helpers
-@using Ecommerce.Application.Dto
-@using Ecommerce.Domain.Enums
-@using Ecommerce.Domain.Constants
-@using Ecommerce.Domain.Identity.Constants
-@using Ecommerce.Application.Extension;
 
-@using Ecommerce.Domain.Identity.Permissions
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Authorization
 @using System.Security.Claims
@@ -17,8 +9,7 @@
 @inject IAuthorizationService AuthorizationService
 
 @using System.Text.Json;
-@using Ecommerce.Application.Interfaces
-@inject IKeyAccessor K
+
 
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor context

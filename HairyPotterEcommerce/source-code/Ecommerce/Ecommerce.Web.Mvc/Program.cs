@@ -3,11 +3,7 @@ using AspNetCoreRateLimit;
 using Azure;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
-using Ecommerce.Application.Identity;
-using Ecommerce.Application.Ioc;
-using Ecommerce.Infrastructure.Sql.DataAccess;
-using Ecommerce.Infrastructure.Sql.Ioc;
-using Ecommerce.Web.Mvc.Extension;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -28,9 +24,7 @@ builder.Logging.SetMinimumLevel(LogLevel.Information); // Ensure it's set to Inf
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddMemoryCache();
-builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructureSqlServices(builder.Configuration);
-builder.Services.AddScoped<IAccountService, Ecommerce.Application.Services.AccountService>();
+
 
 
 builder.Services.AddHttpContextAccessor();
@@ -83,7 +77,6 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 
 var app = builder.Build();
-app.MigrateAndSeed();
 
 
 //DependencyInjection.ExecuteMigrate(app.Services);
