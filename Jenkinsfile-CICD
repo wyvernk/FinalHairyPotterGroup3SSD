@@ -11,21 +11,25 @@ pipeline {
 	
 		stage('BUILD') {
 			steps {
+				echo "Building the app..."
 			}
 		}
 	
 		stage('TEST') {
 			steps {
+				echo "Testing the app"
 			}
 		}
 	
 		stage('DEPLOY') {
 			steps {
+				echo "Deploying the app"
 			}
 		}
 	}
 	post {
 		success {
+			echo "Successfully Deployed the Wep Application"
 		}
 	}
 }
