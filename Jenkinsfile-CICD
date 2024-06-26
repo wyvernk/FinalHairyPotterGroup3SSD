@@ -1,0 +1,34 @@
+pipeline {
+	agent any
+	stages {
+		stage('Checkout SCM') {
+			steps {
+				git branch: 'main',
+    					credentialsId: 'Cred-GitHub_PAT_motorfireman',
+   					url: 'https://github.com/motorfireman/HairyPotterGroup3SSD.git'
+			}
+		}
+	
+		stage('BUILD') {
+			steps {
+				}
+			}
+		}
+	
+		stage('TEST') {
+			steps {
+				}
+			}
+		}
+	
+		stage('DEPLOY') {
+			steps {
+				}
+			}
+		}
+	}
+	post {
+		success {
+		}
+	}
+}
