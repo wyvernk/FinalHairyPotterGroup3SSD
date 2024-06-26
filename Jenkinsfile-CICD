@@ -11,19 +11,16 @@ pipeline {
 	
 		stage('BUILD') {
 			steps {
-				}
 			}
 		}
 	
 		stage('TEST') {
 			steps {
-				}
 			}
 		}
 	
 		stage('DEPLOY') {
 			steps {
-				}
 			}
 		}
 	}
