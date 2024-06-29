@@ -1,0 +1,11 @@
+﻿@model IEnumerable<OrderStatusDto>
+@{
+    Layout = LayoutPage.ShopLayout;
+    ViewData["Title"] = "Order Tracking";
+    var invoiceNo = ViewBag.InvoiceNo as string;
+    var currentOrderStatus = ViewBag.CurrentOrderStatus as string;
+}
+
+@section Styles{
+<link href="~/others/css/order-track.css" rel="stylesheet" />
+}
