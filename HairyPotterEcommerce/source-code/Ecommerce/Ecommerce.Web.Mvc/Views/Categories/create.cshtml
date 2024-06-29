@@ -64,3 +64,63 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="/others/js/hierarchy-select.min.js"></script>
+    <script>
+        $(document).on('change', '#autoGenSlug', function () {
+            if (this.checked) autoGenSlug();
+        });
+
+        $(document).on('change keyup input', 'input[name="Name"]', function () {
+            let autoGen = document.getElementById('autoGenSlug').checked;
+            if (autoGen) autoGenSlug();
+        });
+
+        function autoGenSlug() {
+            let text = $('input[name="Name"]').val();
+            text = text
+                .replace(/\s+/g, '-') //replace space with dash(-)
+                .replace('&', 'And').replace(',', '').replace('.', '').replace("'", '').toLowerCase();
+            $('input[name="Slug"]').val(text);
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            LoadSubCategory();
+        });
+
+        function LoadSubCategory() {
+            $.ajax({
+                url: '@Url.Action("GetCategoriesBySub")',
+                type: 'GET',
+                success: function (response) {
+                    console.log(response);
+                    var html = '';
+                    html += '<a class="dropdown-item active" data-value="" data-level="1" data-default-selected="" href="#">Select Categories</a>';
+                    $('.hierarchy-select>button').html('Select Categories');
+                    var level = 0;
+
+
+                    renderCategory(response, level);
+                    function renderCategory(response, level) {
+                        level++;
+                        $.each(response, function (key, item) {
+                            if (item?.children?.length == 0) {
+                                html += '<a class="dropdown-item" data-value="' + item.id + '" data-level="' + level + '" href="#">' + item.name + '</a>';
+                            } else {
+                                html += '<a class="dropdown-item" data-value="' + item.id + '" data-level="' + level + '" href="#">' + item.name + '</a>';
+                                renderCategory(item.children, level);
+                            }
+                        });
+                    }
+                    $('.hs-menu-inner').append(html);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+}
