@@ -108,3 +108,66 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $(document).on("click", "#addNewBanner", function () {
+            var singleItem = $('.banner-single-item').html();
+            $("#banners .bannerItems").append(singleItem);
+        });
+
+        //Collect data
+        $("#saveHeaderBanner").click(function (e) {
+            e.preventDefault();
+
+            var bannerList = [];
+            bannerList.length = 0;
+
+            var order = 0;
+            $.each($("#banners .single-item"), function () {
+                order++;
+                bannerList.push({
+                    Title: $(this).find('input[name=Title]').val(),
+                    SubTitle: $(this).find('input[name=SubTitle]').val(),
+                    ColorHexCode: $(this).find('input[name=ColorHexCode]').val(),
+                    BackgroundColorHexCode: $(this).find('input[name=BackgroundColorHexCode]').val(),
+                    IsActive: $(this).find("input[name='IsActive']").is(":checked")
+                });
+            });
+
+
+            var data = JSON.stringify(bannerList);
+
+            $.when(saveSlider(data)).then(function (response) {
+                //if success
+                notifier.open({ type: "success", message: "Slider Updated" });
+            }).fail(function (err) {
+                console.log(err);
+                notifier.open({ type: "error", message: err });
+            });
+        });
+
+        function saveSlider(data) {
+            console.log(data);
+            var obj = jQuery.parseJSON(data);
+            return $.ajax({
+                url: "/Configuration/UpdateBanner",
+                type: 'POST',
+                data: { banners: obj },
+                success: function (result) {
+                    //location.reload();
+                },
+                error: function () {
+                    alert("Error!");
+                }
+            });
+        }
+
+
+        $(document).on("click", ".item-remove", function () {
+            $(this).closest('.single-item').remove();
+        });
+
+
+    </script>
+}
