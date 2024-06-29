@@ -1,0 +1,70 @@
+@using System.Collections
+@model PaginatedList<ShopShowcaseDto>
+@{
+    var selectedCategory = ViewBag.SelectedCategory as CategoryDto??new CategoryDto();
+    ViewData["Title"] = selectedCategory.Name;
+    Layout = LayoutPage.ShopLayout;
+    GeneralConfigurationDto conGen = JsonSerializer.Deserialize<GeneralConfigurationDto>(K["GeneralConfiguration"])!;
+
+
+    var sizeFilter = ViewBag.AvailableSize as List<SizeDto>;
+    var colorFilter = ViewBag.AvailableColor as List<ColorDto>;
+    var categoryFilter = ViewBag.AvailableCategory as List<CategoryDto>;
+
+    IEnumerable<ShopShowcaseDto> productItemList = Model.Items;
+
+    var selectedColor = ViewBag.SelectedColor as List<ColorDto>;
+    var selectedSize = ViewBag.SelectedSize as List<SizeDto>;
+
+    var selectedColorId = selectedColor?.Select(c => c.Id).ToList();
+    var selectedSizeId = selectedSize?.Select(c => c.Id).ToList();
+}
+
+@section Styles{
+    <style>
+        .available-color {
+            content: '';
+            box-shadow: 0 0 2px 1px #dfdfdf;
+            border: 1px solid #f7f7f7;
+            margin-right: 6px;
+            border-radius: 3px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            height: 16px;
+            width: 16px;
+        }
+
+        .single-product-image {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .variant-section {
+            position: absolute;
+            width: 100%;
+            bottom: -150px;
+            background-color: #ffffff;
+            -webkit-transition: all 0.4s linear;
+            -moz-transition: all 0.4s linear;
+            -o-transition: all 0.4s linear;
+            transition: all 0.4s linear;
+        }
+
+        .single-product-image:hover .variant-section {
+            bottom: 0;
+        }
+
+        .available-filter {
+            border: 1px solid #ebebeb;
+            padding: 1px 3px;
+            column-width: 20px;
+            margin-right: 4px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            font-size: 11px;
+            text-align: center;
+            border-radius: 2px;
+        }
+    </style>
+}
