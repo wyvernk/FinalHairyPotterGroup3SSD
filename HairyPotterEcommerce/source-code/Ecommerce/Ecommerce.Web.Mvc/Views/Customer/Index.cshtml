@@ -1,0 +1,91 @@
+@{
+    ViewData["Title"] = "Customer";
+}
+
+
+<div class="page-title-box">
+    <h4 class="page-title">Customer</h4>
+</div>
+
+
+<div class="card mb-4">
+    @*<div class="card-header">
+    </div>*@
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tblSize" class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>ID</th>
+                        <th class="all">Full Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>ShippingAddress</th>
+                        <th>BillingAddress</th>
+                        <th class="all"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+<script type="text/javascript">
+    $(function () {
+
+            suTable = $('#tblSize').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "responsive": true,
+                "autoWidth": false,
+                "ajax": $.fn.dataTable.pipeline({
+                    url: '@Url.Action("RenderView")',
+                    pages: 5 //number of pages to cache
+                }),
+                "order": [[0, "desc"]],
+                "columnDefs": [
+                    { "targets": [0], "visible": false, "searchable": false },
+                    { "targets": [6], "searchable": false, "orderable": false, "className": "text-end user-action" }
+                ],
+                "columns": [
+                    { "data": "id", "name": "Id" },
+                    { "data": "userFullName", "name": "UserFullName" },
+                    { "data": "userPhoneNumber", "name": "UserPhoneNumberNumber" },
+                    { "data": "userEmail", "name": "UserEmail" },
+                    { "data": "shippingAddress", "name": "ShippingAddress" },
+                    { "data": "billingAddress", "name": "BillingAddress" },
+                    
+                    {
+                        'data': null,
+                        'render': function (data, type, row) {
+                            var myHtml = '';
+
+                            @{
+                                if(AuthorizationService.AuthorizeAsync(User, Permissions.Permissions_Order_Edit).Result.Succeeded)
+                                {
+
+                                    <text>
+                                        myHtml += '<a class="btn btn-grass-outline btn-sm m-1" href="@Url.Action("Details")/' + row.id + '"><i class="fa fa-search"></i></a>';
+                                    </text>
+                                }
+                                if(AuthorizationService.AuthorizeAsync(User, Permissions.Permissions_Customer_Edit).Result.Succeeded)
+                                {
+                                        <text>
+                                        myHtml += '<a class="btn btn-sky-outline btn-sm m-1" onclick="editClick(' + row.id + ')" href="@Url.Action("Edit")/' + row.id + '"><i class="fa fa-pen"></i></a>';
+                                        </text>
+                                }
+                            }
+
+                            return myHtml;
+                        }
+                    }
+                ]
+            });
+        });
+
+
+</script>
+}
