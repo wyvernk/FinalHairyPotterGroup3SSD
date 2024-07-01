@@ -9,25 +9,21 @@
         .table td {
             vertical-align: top;
         }
-
         .product-table tr td img {
             height: 60px;
             width: 60px;
             object-fit: cover;
             border: 2px solid #fff;
         }
-
         #tblProduct td:last-child {
             vertical-align: middle;
         }
-
     </style>
 }
 
 <div class="page-title-box">
     <h4 class="page-title">Product</h4>
 </div>
-
 
 <div class="card mb-4">
     <div class="card-header">
@@ -40,14 +36,19 @@
         <div class="table-responsive">
             <table id="tblProduct" class="table product-table">
                 <thead class="thead-light">
+				
                     <tr>
                         <th>ID</th>
                         <th class="all">Name</th>
                         <th class="all"></th>
                     </tr>
+					
                 </thead>
+				
             </table>
+			
         </div>
+		
     </div>
 </div>
 
@@ -78,7 +79,6 @@
                         "name": "Name",
                         "render": function (data, type, row) {
                             var myHtml = '';
-
                             myHtml += `
                             <div class="d-inline-block">
                                 <img class="me-1" src="`+ (row.imagePreview != null ? "/" + row.imagePreview : "/assets/images/no-image.png") + `" alt="image_not_found">
@@ -87,7 +87,6 @@
                                     <span class="d-block"><strong>Category: </strong><i style="color:#8BC34A;">`+ row.categoryName +`</i></span>
                                 </div>
                             </div>`;
-
                             return myHtml;
                         }
                     },
@@ -95,7 +94,6 @@
                         'data': null,
                         'render': function (data, type, row) {
                             var myHtml = '';
-
                             @{
                                 if(AuthorizationService.AuthorizeAsync(User, Permissions.Permissions_Product_Create).Result.Succeeded)
                                 {
@@ -114,6 +112,8 @@
                                         <text>
                                             myHtml += '<a su-delete su-data-id="' + row.id + '" su-data-action="@Url.Action("Delete")"  href="javascript:void(0)" class="btn btn-carrot-outline btn-sm btn-action"><i class="fa fa-trash-alt"></i></a>';
                                         </text>
+										
+										
                                 }
                             }
 
@@ -123,7 +123,5 @@
                 ]
             });
         });
-
-
     </script>
 }
