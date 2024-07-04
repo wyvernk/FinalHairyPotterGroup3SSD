@@ -120,21 +120,21 @@ NOT IN USE
           sudo sed -i 's/app.Run();/app.UseForwardedHeaders();\n\n\napp.Run();/g' /home/student11/HairyPotterGroup3SSD/Ecommerce_NetCore7_v1.1.1/source-code/Ecommerce/Ecommerce.Web.Mvc/Program.cs
 
           #Stop and Clean All Existing WebApp
-          ###sudo docker stop webapp_container_1
-          ###sudo docker stop webapp_container_2
-          ###sudo docker system prune -af
+          sudo docker stop webapp_container_1
+          sudo docker stop webapp_container_2
+          sudo docker system prune -af
 
           #Build the webapp
-          ###sudo docker build -t webapp_image -f /home/student11/HairyPotterGroup3SSD/Dockerfile-ASPNET  /home/student11/HairyPotterGroup3SSD/Ecommerce_NetCore7_v1.1.1/source-code/Ecommerce/
+          sudo docker build -t webapp_image -f /home/student11/HairyPotterGroup3SSD/Dockerfile-ASPNET  /home/student11/HairyPotterGroup3SSD/Ecommerce_NetCore7_v1.1.1/source-code/Ecommerce/
 
           #Create Network for ASPNET and MSSQL
-          ###sudo docker network create --driver=bridge --subnet=172.23.0.0/24 --ip-range=172.23.0.0/24 --gateway=172.23.0.1 web_net
+          sudo docker network create --driver=bridge --subnet=172.23.0.0/24 --ip-range=172.23.0.0/24 --gateway=172.23.0.1 web_net
 
-          ###sudo docker compose -f /home/student11/HairyPotterGroup3SSD/docker-compose-ASPNET_MSSQL.yml down
-          ###sudo docker compose -f /home/student11/HairyPotterGroup3SSD/docker-compose-ASPNET_MSSQL.yml up -d
-          ###sudo docker system prune -af
-          ###sudo rm -rf /home/student11/HairyPotterGroup3SSD
-          ###""".stripIndent()
+          sudo docker compose -f /home/student11/HairyPotterGroup3SSD/docker-compose-ASPNET_MSSQL.yml down
+          sudo docker compose -f /home/student11/HairyPotterGroup3SSD/docker-compose-ASPNET_MSSQL.yml up -d
+          sudo docker system prune -af
+          sudo rm -rf /home/student11/HairyPotterGroup3SSD
+          """.stripIndent()
         }
       }
     }
