@@ -1,0 +1,60 @@
+@{
+    ViewData["Title"] = "Delivery Method";
+    Layout = LayoutPage.AdminLayout;
+}
+
+
+<div class="page-title-box">
+    <h4 class="page-title">Delivery Method</h4>
+</div>
+
+
+<div class="card mb-4">
+    <div class="card-header">
+        @if (AuthorizationService.AuthorizeAsync(User, Permissions.Permissions_DeliveryMethod_Create).Result.Succeeded)
+        {
+            <a asp-action="Create" class="btn btn-blue"><i class="fa-solid fa-plus"></i> Create New</a>
+        }
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tblDlvMethod" class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th class="all">Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>IsActive</th>
+                        <th class="all"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        @if (AuthorizationService.AuthorizeAsync(User, Permissions.Permissions_DeliveryMethod_Create).Result.Succeeded)
+        {
+            <a asp-action="Create" class="btn btn-blue"><i class="fa-solid fa-plus"></i> Create New</a>
+        }
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tblDlvMethod" class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th class="all">Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>IsActive</th>
+                        <th class="all"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
