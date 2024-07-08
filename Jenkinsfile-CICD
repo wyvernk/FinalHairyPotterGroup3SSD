@@ -1,6 +1,7 @@
 pipeline {
   agent any
 
+
   environment {
     GIT_TOKEN = credentials('Cred-GitHub_Webhook_motorfireman')
     PUBLIC_JENKINS_URL_PORT = "ict2216g3.ddns.net:8080"
